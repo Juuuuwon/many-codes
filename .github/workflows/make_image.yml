@@ -30,6 +30,6 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: ghcr.io/Su-per/many-codes:latest
+          tags: ghcr.io/su-per/many-codes:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
