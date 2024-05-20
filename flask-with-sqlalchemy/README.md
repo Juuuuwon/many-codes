@@ -1,7 +1,7 @@
 # API
 + GET /users  
     + __response__
-        + `[{"id": "id", "name": "name", "email": "email"}, ...]`
+        + `[{"id": id, "name": "name", "email": "email"}, ...]`
 + POST /users
     + __request__
         + `{"name": "name", "email": "email"}`
