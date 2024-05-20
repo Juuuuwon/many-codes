@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Management</title>
+    <script>
+        async function fetchUsers() {
+            const response = await fetch('/users');
+            const users = await response.json();
+            const userList = document.getElementById('user-list');
+            userList.innerHTML = '';
+            users.forEach(user => {
+                const li = document.createElement('li');
+                li.textContent = `Name: ${user.name}, Email: ${user.email}`;
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.onclick = async () => {
+                    await fetch(`/users/${user.id}`, { method: 'DELETE' });
+                    fetchUsers();
+                };
+                li.appendChild(deleteButton);
+                userList.appendChild(li);
+            });
+        }
+
+        async function addUser(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            await fetch('/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, email })
+            });
+            document.getElementById('name').value = '';
+            document.getElementById('email').value = '';
+            fetchUsers();
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchUsers);
+    </script>
+</head>
+<body>
+    <h1>User Management</h1>
+    <form onsubmit="addUser(event)">
+        <input type="text" id="name" placeholder="Enter name" required>
+        <input type="email" id="email" placeholder="Enter email" required>
+        <input type="submit" value="Add User">
+    </form>
+    <ul id="user-list"></ul>
+</body>
+</html>
