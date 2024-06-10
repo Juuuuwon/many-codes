@@ -1,6 +1,6 @@
 FROM python:3.9
 
-COPY . .
+COPY app.py app.py
 
 RUN pip install fastapi uvicorn pymysql
 
