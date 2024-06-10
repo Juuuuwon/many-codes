@@ -5,6 +5,7 @@ services:
     image: nginx:latest
     volumes:
       - ./nginx/index.html:/var/www/html/index.html
+      - ./nginx/index.html:/usr/share/nginx/html/index.html
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     ports:
       - "80:80"
