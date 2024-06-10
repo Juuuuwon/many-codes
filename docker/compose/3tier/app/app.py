@@ -4,7 +4,7 @@ import pymysql
 
 app = FastAPI()
 
-@app.get("/")
+@app.get("/app")
 def index():
     conn = pymysql.connect(
         host='db',   
